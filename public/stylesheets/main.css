@@ -1,0 +1,99 @@
+@import url(http://fonts.googleapis.com/css?family=Exo:400,700,100);
+@import url(http://fonts.googleapis.com/css?family=Aldrich);
+
+body {
+  background:url('http://7-themes.com/data_images/out/37/6894295-dark-background-wallpaper.jpg');
+  font-family: 'Aldrich', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+
+
+/*BUTTON style*/
+
+.btn-container a {
+  border-radius: 6px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #fff;
+  padding: 14px 33px;
+  font-weight: 600;
+  border: 1px solid #fff;
+  line-height: 50px;
+  cursor: pointer;
+}
+
+.btn-container a:hover, .btn-container a.active {
+  color: #009bdf;
+  background: transparent;
+  border-color: #009bdf;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background: #009BDE;
+  color: #fff;
+  text-transform: uppercase;
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.btn-container a {
+  margin-right: 10px;
+}
+
+.btn-container a.active {
+  color: #009bdf !important;
+}
+
+.btn-container .trailer {
+  color: rgba(186, 186, 186, 0.63);
+  margin-right: 0 !important;
+}
+
+.movie-item {
+  width: 70em;
+  margin: auto;
+  padding: 1em;
+}
+
+.movie-card {
+  width: 20em;
+  height: 33em;
+  margin: 1em;
+}
+
+.poster-field {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.poster {
+  margin: 1em 2em;
+  width: 14em;
+  height: 21em;
+}
+
+.title-field {
+  margin-top: 1em;
+}
+
+.movie-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-align: center;
+}
+
+.copyright{
+  color:#269abc;
+}
+
+.user-picture {
+  border-radius: 10px;
+}
