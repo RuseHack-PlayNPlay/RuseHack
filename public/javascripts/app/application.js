@@ -1,5 +1,28 @@
 var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll']);
 
+function ruseHackAppConfig($routeProvider) {
+  $routeProvider.when('/', {
+    controller: 'mainController'
+  }).when('/upcoming', {
+    controller: 'movieController',
+    templateUrl: 'upcoming.html'
+  }).when('/topRated', {
+    controller: 'movieController',
+    templateUrl: 'topRated.html'
+  }).when('/nowPlaying', {
+    controller: 'movieController',
+    templateUrl: 'nowPlaying.html'
+  }).when('/popular', {
+    controller: 'movieController',
+    templateUrl: 'popular.html'
+  })
+
+      .otherwise({
+        redirectTo:'/index.html'
+      });
+}
+ruseHackApp.config(ruseHackAppConfig);
+
 ruseHackApp.controller('mainController', function ($q, $scope, $http) {
   $(document).ready(function () {
     new WOW().init();
@@ -24,22 +47,29 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-
   $scope.userName = "";
   $scope.userMail = "";
   $scope.userId = "";
   $scope.userPic = "";
+  $scope.categoryButtonsVisibility = "display:none";
+  $scope.loginButtonVisibility = "display: inline";
+  $scope.userPicVisibility = "visibility: hidden";
 
-
+  console.log("asdsa");
   $scope.login = function () {
-    var user = loginFacebook().then(function (result) {
+    console.log("login");
+    var user = loginFacebook();
+    user.then(function (result) {
       $scope.userName = result.name;
       $scope.userMail = result.email;
       $scope.userId = result.id;
-      setPic($scope.userId).then(function (response) {
+      setPic(result.id).then(function (response) {
         $scope.userPic = response.data.url;
+        $scope.categoryButtonsVisibility = "display:inline";
+        $scope.loginButtonVisibility = "display: none";
+        $scope.userPicVisibility = "visibility: visible";
       })
-    })
+    });
   };
 
   function loginFacebook() {
@@ -63,6 +93,8 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
     });
     return defferred.promise;
   }
+});
 
-
+ruseHackApp.controller('movieController', function ($scope, $http) {
+  console.log("movie");
 });

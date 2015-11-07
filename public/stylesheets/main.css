@@ -2,14 +2,18 @@
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
 body {
-  background:url('http://7-themes.com/data_images/out/37/6894295-dark-background-wallpaper.jpg');
+  /*background:url('http://7-themes.com/data_images/out/37/6894295-dark-background-wallpaper.jpg');*/
+  background: #000;
   font-family: 'Aldrich', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
 }
 
-
+.border-now {
+  border: 1px solid white;
+  color: white;
+}
 
 
 /*BUTTON style*/
@@ -24,6 +28,7 @@ body {
   border: 1px solid #fff;
   line-height: 50px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn-container a:hover, .btn-container a.active {
