@@ -20,9 +20,15 @@
             <span class="movie-title">{{item.title}}</span>
           </h3>
         </div>
+        <h5>
+          <span class="">{{item.release_date}}</span>
+        </h5>
+        <h5>
+          <span class="">Rating: {{item.vote_average}}</span>
+        </h5>
         <div class="btn-container">
           <form>
-            <a type="button" ng-href="#/player/{{item.id}}/{{item.title}}" class="trailer" target="_blank">Trailer <i class="glyphicon glyphicon-play"></i></a>
+            <a type="button" ng-href="#/player/{{item.key}}/{{item.title}}" class="trailer" target="_blank">Trailer <i class="glyphicon glyphicon-play"></i></a>
           </form>
         </div>
       </div>

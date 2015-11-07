@@ -260,9 +260,9 @@ ruseHackApp.controller('playerController', function ($scope, $http, $routeParams
   $rootScope.loginButtonVisibility = "display: none";
   //console.log($routeParams);
 //Tuka e za info za videoto
-  //$http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
-  //  console.log(data);
-  //});
+  $http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
+    console.log(data);
+  });
 
   $scope.currentProjectUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + $routeParams.id);
 
