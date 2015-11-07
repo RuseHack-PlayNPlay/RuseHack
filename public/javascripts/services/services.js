@@ -71,6 +71,9 @@ services.service('movieDao', function ($http, $q) {
     };
 });
 
+/**
+ * cache
+ */
 services.service('cache', function ($http, $q,QUERY) {
     /**
      *Checks maintenance webDb
@@ -195,7 +198,6 @@ services.service('cache', function ($http, $q,QUERY) {
         return deferred.promise;
     }
 
-
     /**
      *On success
      * @param tx
@@ -214,8 +216,6 @@ services.service('cache', function ($http, $q,QUERY) {
     function onError(err) {
         //console.log(err);
     }
-
-
 });
 
 
