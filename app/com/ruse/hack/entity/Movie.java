@@ -26,8 +26,8 @@ public class Movie extends  BaseEntity {
     @Column(name = "poster_path",length = 300)
     private String poster_path;
 
-    @Column(name = "imdb_id")
-    private String imdb_id;
+    @Column(name = "vote_average")
+    private String vote_average;
 
     @Column(name = "key")
     private String key;
@@ -84,12 +84,12 @@ public class Movie extends  BaseEntity {
         this.poster_path = poster_path;
     }
 
-    public String getImdb_id() {
-        return imdb_id;
+    public String getVote_average() {
+        return vote_average;
     }
 
-    public void setImdb_id(String imdb_id) {
-        this.imdb_id = imdb_id;
+    public void setVote_average(String vote_average) {
+        this.vote_average = vote_average;
     }
 
     public String getKey() {
@@ -128,8 +128,8 @@ public class Movie extends  BaseEntity {
         return now_playing;
     }
 
-    public void setNow_playing(boolean naw_playing) {
-        this.now_playing = naw_playing;
+    public void setNow_playing(boolean now_playing) {
+        this.now_playing = now_playing;
     }
 
     @Override
@@ -148,7 +148,7 @@ public class Movie extends  BaseEntity {
         if (overview != null ? !overview.equals(movie.overview) : movie.overview != null) return false;
         if (release_date != null ? !release_date.equals(movie.release_date) : movie.release_date != null) return false;
         if (poster_path != null ? !poster_path.equals(movie.poster_path) : movie.poster_path != null) return false;
-        if (imdb_id != null ? !imdb_id.equals(movie.imdb_id) : movie.imdb_id != null) return false;
+        if (vote_average != null ? !vote_average.equals(movie.vote_average) : movie.vote_average != null) return false;
         return !(key != null ? !key.equals(movie.key) : movie.key != null);
 
     }
@@ -160,7 +160,7 @@ public class Movie extends  BaseEntity {
         result = 31 * result + (overview != null ? overview.hashCode() : 0);
         result = 31 * result + (release_date != null ? release_date.hashCode() : 0);
         result = 31 * result + (poster_path != null ? poster_path.hashCode() : 0);
-        result = 31 * result + (imdb_id != null ? imdb_id.hashCode() : 0);
+        result = 31 * result + (vote_average != null ? vote_average.hashCode() : 0);
         result = 31 * result + (key != null ? key.hashCode() : 0);
         result = 31 * result + (popular ? 1 : 0);
         result = 31 * result + (upcoming ? 1 : 0);

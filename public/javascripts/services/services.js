@@ -8,8 +8,8 @@ var services = angular.module('services', []);
  */
 services.constant('QUERY', {
     "INVALIDATE": "DELETE FROM ",
-    "INSERT": "INSERT INTO CACHE (id,title,overview,release_date,poster_path,imdb_id,key,popular,upcoming,top_rated,now_playing) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-    "CREATE": "CREATE TABLE IF NOT EXISTS CACHE (id INTEGER, title BLOB, overview BLOB, release_date BLOB, poster_path BLOB, imdb_id BLOB, key BLOB, popular BLOB ,upcoming BLOB, top_rated BLOB, now_playing BLOB,PRIMARY KEY(id))",
+    "INSERT": "INSERT INTO CACHE (id,title,overview,release_date,poster_path,vote_average,key,popular,upcoming,top_rated,now_playing) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    "CREATE": "CREATE TABLE IF NOT EXISTS CACHE (id INTEGER, title BLOB, overview BLOB, release_date BLOB, poster_path BLOB, vote_average BLOB, key BLOB, popular BLOB ,upcoming BLOB, top_rated BLOB, now_playing BLOB,PRIMARY KEY(id))",
     "INDEX_NOW_PLAYING": "CREATE INDEX  IF NOT EXISTS idx_now_playing ON CACHE (now_playing)",
     "INDEX_POPULAR": "CREATE INDEX  IF NOT EXISTS idx_popular ON CACHE (popular)",
     "INDEX_TOP_RATED": "CREATE INDEX  IF NOT EXISTS idx_top_rated ON CACHE (top_rated)",
@@ -18,7 +18,7 @@ services.constant('QUERY', {
 
 
 /**
- *MOvie dao
+ *Movie dao
  */
 services.service('movieDao', function ($http, $q) {
 
@@ -133,7 +133,7 @@ services.service('cache', function ($http, $q,QUERY) {
         var dbConn = openDatabase("CACHE", "1.0", "VIDEO", 50 * 1024 * 1024);
         dbConn.transaction(function (tx) {
             for (var i = 0; i < items.length; i++) {
-                tx.executeSql(QUERY.INSERT, [items[i].id, items[i].title,items[i].overview,items[i].release_date,items[i].poster_path,items[i].imdb_id,items[i].key,items[i].popular,items[i].upcoming,items[i].top_rated,items[i].now_playing],
+                tx.executeSql(QUERY.INSERT, [items[i].id, items[i].title,items[i].overview,items[i].release_date,items[i].poster_path,items[i].vote_average,items[i].key,items[i].popular,items[i].upcoming,items[i].top_rated,items[i].now_playing],
                     onSuccessExecuteSql,
                     onError);
             }

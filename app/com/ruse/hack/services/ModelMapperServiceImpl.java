@@ -23,6 +23,7 @@ public class ModelMapperServiceImpl implements  ModelMapperService {
             movie.setPoster_path(node.get("poster_path").asText());
             movie.setTitle(node.get("original_title").asText());
             movie.setRelease_date(node.get("release_date").asText());
+            movie.setVote_average(node.get("vote_average").asText());
             if(node.get("key") != null){
                 movie.setKey(node.get("key").asText());
             }

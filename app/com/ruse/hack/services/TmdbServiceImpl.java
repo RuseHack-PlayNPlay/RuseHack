@@ -32,7 +32,7 @@ public class TmdbServiceImpl implements TmdbService {
     private final String UPCOMING="upcoming";
     private final String NOW_PLAYING="now-playing";
     private final String PARAM_PAGE = "page=";
-    private final String[] FILTER = {"id","title","overview","poster_path","imdb_id","key","category","release_date","original_title"};
+    private final String[] FILTER = {"id","title","overview","poster_path","imdb_id","key","category","release_date","original_title","vote_average"};
     private final HttpClientBuilder httpClient;
 
     @Inject
@@ -55,8 +55,8 @@ public class TmdbServiceImpl implements TmdbService {
                 }
                 page = result.get("total_pages").asInt();
             }
-            if(page > 20){
-                page = 20;
+            if(page > 2){
+                page = 2;
             }
         } catch (HttpResponseException e){
 
