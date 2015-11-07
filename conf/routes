@@ -5,7 +5,10 @@
 # Home page
 GET        /                                                           controllers.Application.index()
 GET        /index.html                                                 controllers.Assets.at(path="/public/html", file="index.html")
-GET        /home                                                       @controllers.LoadDataController.loadData()
+GET        /init                                                       @controllers.InitController.initData()
+GET        /getMovie                                                   @controllers.MovieController.getMovie(category:String,limit:Integer,offset:Integer)
+GET        /count/category                                             @controllers.MovieController.getCountByCategory(category:String)
+GET        /count                                                      @controllers.MovieController.getCount()
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                                               controllers.Assets.versioned(path="/public", file: Asset)
