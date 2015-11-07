@@ -23,8 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-4 border-now text-center"><h3 class="wow fadeInDown">The media is in your
-      hands!</h3>
+    <div class="col-md-4 border-now text-center"><h3 class="wow fadeInDown">{{mainTitle}}</h3>
     </div>
     <div class="col-md-4 border-now"></div>
   </div>
@@ -37,20 +36,24 @@
   <div class="col-md-5"></div>
 </div>
 <div class="row">
-  <div class="col-md-3"></div>
-  <div class="col-md-7 border-now">
+  <div class="col-md-1"></div>
+  <div class="col-md-10 border-now text-center">
     <div class="btn-container">
       <div class="wow fadeInDown" style={{categoryButtonsVisibility}}>
-        <a ng-href="#/movie/now-playing" ng-click="selectCategory(1)" style={{selectedButton1}}>Now Playing</a>
-        <a ng-href="#/movie/popular" ng-click="selectCategory(1)" style={{selectedButton1}}>Popular</a>
-        <a ng-href="#/movie/top-rated" ng-click="selectCategory(2)" style={{selectedButton2}}>Top Rated</a>
+        <a ng-href="#/movie/now-playing" ng-click="selectCategory(0)" style={{selectedButton0}}>Now
+          Playing</a>
+        <a ng-href="#/movie/popular" ng-click="selectCategory(1)"
+           style={{selectedButton1}}>Popular</a>
+        <a ng-href="#/movie/top-rated" ng-click="selectCategory(2)" style={{selectedButton2}}>Top
+          Rated</a>
         <a ng-href="#/movie/upcoming" ng-click="selectCategory(3)" style={{selectedButton3}}>Upcoming</a>
+        <a ng-href="#/youtubeVideos" ng-click="selectCategory(4)" style={{selectedButton4}}>YouTube</a>
       </div>
       <div class="col-md-1 border-now" style={{loginButtonVisibility}}></div>
-      <div class="col-md-8 text-center">
-        <a class="wow fadeIn" ng-click="login()" style={{loginButtonVisibility}}>Login with fb</a>
+      <div class="col-md-10">
+        <a class="wow fadeInDown" ng-click="login()" style={{loginButtonVisibility}}>Login with facebook</a>
       </div>
-      <div class="col-md-2"></div>
+      <div class="col-md-1"></div>
     </div>
   </div>
   <div class="col-md-2 border-now"></div>
@@ -72,6 +75,7 @@
 <script src="/public/javascripts/vendor/wow.min.js"></script>
 <script src="/public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 <script src="/public/javascripts/services/services.js"></script>
+<script src="/public/javascripts/directives/directives.js"></script>
 <script src="/public/javascripts/app/application.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', 'services']);
+var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', 'services', 'directives']);
 
 function ruseHackAppConfig($routeProvider) {
   $routeProvider.when('/', {
@@ -6,6 +6,12 @@ function ruseHackAppConfig($routeProvider) {
   }).when('/movie/:category', {
     controller: 'movieController',
     templateUrl: 'movies.html'
+  }).when('/player/:id/:title', {
+    controller: 'playerController',
+    templateUrl: 'player.html'
+  }).when('/youtubeVideos', {
+    controller: 'youtubeController',
+    template: 'youtubeVideos.html'
   })
 
       .otherwise({
@@ -14,7 +20,9 @@ function ruseHackAppConfig($routeProvider) {
 }
 ruseHackApp.config(ruseHackAppConfig);
 
-ruseHackApp.controller('mainController', function ($q, $scope, $http) {
+ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope) {
+  $rootScope.mainTitle = "The media is in your hands!";
+
   $(document).ready(function () {
     new WOW().init();
   });
@@ -43,7 +51,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
   $scope.userId = "";
   $scope.userPic = "";
   $scope.categoryButtonsVisibility = "display:none";
-  $scope.loginButtonVisibility = "display: inline";
+  $rootScope.loginButtonVisibility = "display: inline";
   $scope.userPicVisibility = "visibility: hidden";
 
   $scope.login = function () {
@@ -87,22 +95,74 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
     switch (id) {
       case 0:
       {
-        $scope.selectedButton0 = "color:#009bdf; border-color:#009bdf";
-        $scope.selectedButton1 = "color:#009bdf; border-color:#009bdf";
+        $scope.selectedButton0 = "border-color:#009bdf";
+        $scope.selectedButton1 = "border-color:white";
+        $scope.selectedButton2 = "border-color:white";
+        $scope.selectedButton3 = "border-color:white";
+        $scope.selectedButton4 = "border-color:white";
       }
+        break;
+      case 1:
+      {
+        $scope.selectedButton0 = "border-color:white";
+        $scope.selectedButton1 = "border-color:#009bdf";
+        $scope.selectedButton2 = "border-color:white";
+        $scope.selectedButton3 = "border-color:white";
+        $scope.selectedButton4 = "border-color:white";
+      }
+        break;
+      case 2:
+      {
+        $scope.selectedButton0 = "border-color:white";
+        $scope.selectedButton1 = "border-color:white";
+        $scope.selectedButton2 = "border-color:#009bdf";
+        $scope.selectedButton3 = "border-color:white";
+        $scope.selectedButton4 = "border-color:white";
+      }
+        break;
+      case 3:
+      {
+        $scope.selectedButton0 = "border-color:white";
+        $scope.selectedButton1 = "border-color:white";
+        $scope.selectedButton2 = "border-color:white";
+        $scope.selectedButton3 = "border-color:#009bdf";
+        $scope.selectedButton4 = "border-color:white";
+
+      }
+        break;
+      case 4: {
+        $scope.selectedButton0 = "border-color:white";
+        $scope.selectedButton1 = "border-color:white";
+        $scope.selectedButton2 = "border-color:white";
+        $scope.selectedButton3 = "border-color:white";
+        $scope.selectedButton4 = "border-color:#009bdf";
+      }
+        break;
+      default:
     }
-  }
+  };
+
+
+// Search for a specified string.
+  $scope.search = function () {
+    $http.get("https://www.googleapis.com/youtube/v3/search", {
+      params: {
+        part: 'picture',
+        q: 'pentakill',
+        type: 'video',
+        key: 'AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI'
+      }
+    })
+        .success(function (data) {
+          console.log(data);
+        })
+  };
+
 });
 
-ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao) {
-  //$scope.movieList = [
-  //  {id: 1, title: "Title", trailerUrl: 'URL'},
-  //  {id: 2, title: "Title", trailerUrl: 'URL'},
-  //  {id: 3, title: "Title", trailerUrl: 'URL'},
-  //  {id: 4, title: "Title", trailerUrl: 'URL'},
-  //  {id: 5, title: "Title", trailerUrl: 'URL'}
-  //];
+ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
 
+  $rootScope.mainTitle = "The media is in your hands!";
   $scope.current = 0;
   $scope.step = 10;
   $scope.numberOfItemsToDisplay = 10;
@@ -121,6 +181,8 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
   });
 
   var categoryCount = movieDao.getCountByCategory($scope.category);
+  console.log($scope.category);
+
   categoryCount.then(function (result) {
     $scope.categoryCount = result;
     flag = true;
@@ -142,10 +204,10 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         $scope.items = result;
         if (result.length > 0 || undefined || null) {
 
-          console.log($scope.items = result)
+          console.log($scope.items = result);
           addItems();
         } else {
-          console.log("from server")
+          console.log("from server");
           fromServer();
         }
       }, function (data) {
@@ -178,16 +240,37 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
       }
     }
   }
+
   /**
    * add movie item
    */
   $scope.addMoreItem = function () {
     if ($scope.numberOfItemsToDisplay < $scope.categoryCount) {
       getMovies();
-      console.dir($scope.movieItems)
+      console.dir($scope.movieItems);
       if ($scope.movieItems.length >= $scope.numberOfItemsToDisplay) {
         $scope.numberOfItemsToDisplay += 10;
       }
     }
   };
 });
+
+ruseHackApp.controller('playerController', function ($scope, $http, $routeParams, $sce, $rootScope) {
+  $rootScope.mainTitle = $routeParams.title;
+  $rootScope.loginButtonVisibility = "display: none";
+  //console.log($routeParams);
+//Tuka e za info za videoto
+  //$http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
+  //  console.log(data);
+  //});
+
+  $scope.currentProjectUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + $routeParams.id);
+
+});
+
+
+ruseHackApp.controller('youtubeController', function ($scope, $http, $rootScope) {
+  console.log("yt");
+});
+
+//AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI
