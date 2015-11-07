@@ -5,7 +5,7 @@
 # Home page
 GET        /                                                           controllers.Application.index()
 GET        /index.html                                                 controllers.Assets.at(path="/public/html", file="index.html")
-GET   /home                         @controllers.LoadDataController.loadData()
+GET        /home                                                       @controllers.LoadDataController.loadData()
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                                               controllers.Assets.versioned(path="/public", file: Asset)
@@ -30,4 +30,12 @@ GET        /public/stylesheets/animate.css                             controlle
 GET        /public/stylesheets/ihover.min.css                          controllers.Assets.at(path="/public/stylesheets", file="ihover.min.css")
 GET        /public/stylesheets/responsive.css                          controllers.Assets.at(path="/public/stylesheets", file="responsive.css")
 GET        /public/stylesheets/main.css                                controllers.Assets.at(path="/public/stylesheets", file="main.css")
+#
+
+#HTML
+GET        /login.html                                                 controllers.Assets.at(path="/public/html", file="login.html")
+GET        /nowPlaying.html                                            controllers.Assets.at(path="/public/html", file="nowPlaying.html")
+GET        /popular.html                                               controllers.Assets.at(path="/public/html", file="popular.html")
+GET        /topRated.html                                              controllers.Assets.at(path="/public/html", file="topRated.html")
+GET        /upcoming.html                                              controllers.Assets.at(path="/public/html", file="upcoming.html")
 #
