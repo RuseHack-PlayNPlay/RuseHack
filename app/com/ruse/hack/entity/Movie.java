@@ -11,14 +11,161 @@ import javax.persistence.Table;
 @Table(name = "movie")
 public class Movie extends  BaseEntity {
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "tmdb_id")
+    private int tmdb_id;
 
-    public String getName() {
-        return name;
+    @Column(name = "title",length = 1000)
+    private String title;
+
+    @Column(name = "overview",length = 3000)
+    private String overview;
+
+    @Column(name = "release_date",length = 20)
+    private String release_date;
+
+    @Column(name = "poster_path",length = 300)
+    private String poster_path;
+
+    @Column(name = "imdb_id")
+    private String imdb_id;
+
+    @Column(name = "key")
+    private String key;
+
+    @Column(name = "popular")
+    private boolean popular;
+
+    @Column(name = "upcoming")
+    private boolean upcoming;
+
+    @Column(name = "top_rated")
+    private boolean top_rated;
+
+    @Column(name = "naw_playing")
+    private boolean naw_playing;
+
+    public int getTmdb_id() {
+        return tmdb_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTmdb_id(int tmdb_id) {
+        this.tmdb_id = tmdb_id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
+    }
+
+    public String getPoster_path() {
+        return poster_path;
+    }
+
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
+    }
+
+    public String getImdb_id() {
+        return imdb_id;
+    }
+
+    public void setImdb_id(String imdb_id) {
+        this.imdb_id = imdb_id;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public boolean isPopular() {
+        return popular;
+    }
+
+    public void setPopular(boolean popular) {
+        this.popular = popular;
+    }
+
+    public boolean isUpcoming() {
+        return upcoming;
+    }
+
+    public void setUpcoming(boolean upcoming) {
+        this.upcoming = upcoming;
+    }
+
+    public boolean isTop_rated() {
+        return top_rated;
+    }
+
+    public void setTop_rated(boolean top_rated) {
+        this.top_rated = top_rated;
+    }
+
+    public boolean isNaw_playing() {
+        return naw_playing;
+    }
+
+    public void setNaw_playing(boolean naw_playing) {
+        this.naw_playing = naw_playing;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Movie movie = (Movie) o;
+
+        if (tmdb_id != movie.tmdb_id) return false;
+        if (popular != movie.popular) return false;
+        if (upcoming != movie.upcoming) return false;
+        if (top_rated != movie.top_rated) return false;
+        if (naw_playing != movie.naw_playing) return false;
+        if (title != null ? !title.equals(movie.title) : movie.title != null) return false;
+        if (overview != null ? !overview.equals(movie.overview) : movie.overview != null) return false;
+        if (release_date != null ? !release_date.equals(movie.release_date) : movie.release_date != null) return false;
+        if (poster_path != null ? !poster_path.equals(movie.poster_path) : movie.poster_path != null) return false;
+        if (imdb_id != null ? !imdb_id.equals(movie.imdb_id) : movie.imdb_id != null) return false;
+        return !(key != null ? !key.equals(movie.key) : movie.key != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = tmdb_id;
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (overview != null ? overview.hashCode() : 0);
+        result = 31 * result + (release_date != null ? release_date.hashCode() : 0);
+        result = 31 * result + (poster_path != null ? poster_path.hashCode() : 0);
+        result = 31 * result + (imdb_id != null ? imdb_id.hashCode() : 0);
+        result = 31 * result + (key != null ? key.hashCode() : 0);
+        result = 31 * result + (popular ? 1 : 0);
+        result = 31 * result + (upcoming ? 1 : 0);
+        result = 31 * result + (top_rated ? 1 : 0);
+        result = 31 * result + (naw_playing ? 1 : 0);
+        return result;
     }
 }

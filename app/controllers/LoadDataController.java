@@ -22,9 +22,8 @@ public class LoadDataController extends Controller {
 
     @Transactional
     public Result loadData(){
-        Movie movie = new Movie();
-        movie.setName("Test");
-        movieDao.save(movie);
+//        Movie movie = new Movie();
+//        movieDao.save(movie);
         return ok("asdasd");
     }
 }
