@@ -37,7 +37,7 @@ body {
 .btn-container a:hover, .btn-container a.active {
   color: #009bdf;
   background: transparent;
-  border-color: #009bdf;
+  border-color: white;
   font-weight: 700;
 }
 
@@ -75,9 +75,6 @@ body {
   margin: 1em;
 }
 
-.movie-card:hover {
-  border: 4px solid darkslategray;
-}
 
 .poster-field {
   white-space: nowrap;
@@ -111,7 +108,6 @@ body {
   width: 6em;
   height: 6em;
   margin-top: 0.2em;
-  /*margin-bottom: 0.5em;*/
 }
 
 .floating-image {
@@ -124,3 +120,8 @@ body {
   margin-top: 1.4em;
   padding-left: 0.4em;
 }
+
+.video-panel, .video-thumbnail, .video-title, .video-uploader {
+  border:1px solid white;
+}
+
