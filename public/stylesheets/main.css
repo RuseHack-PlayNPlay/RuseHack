@@ -75,7 +75,6 @@ body {
   margin: 1em;
 }
 
-
 .poster-field {
   white-space: nowrap;
   overflow: hidden;
@@ -121,7 +120,18 @@ body {
   padding-left: 0.4em;
 }
 
-.video-panel, .video-thumbnail, .video-title, .video-uploader {
-  border:1px solid white;
+.video-panel {
+  background: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.2em;
 }
 
+.video-thumbnail {
+  padding-top: 0.2em;
+  margin: 0 1.3em;
+  height: 180px;
+  width: 320px;
+}
+
+.video-title {
+  padding-top: 0.3em;
+}

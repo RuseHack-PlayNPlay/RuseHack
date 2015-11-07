@@ -1,4 +1,9 @@
-var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', 'services', 'directives']);
+
+//YOUTUBE API KEY AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI
+//FACEBOOK API KEY 641232165979215
+
+
+var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', 'services', 'directives', 'filters']);
 
 function ruseHackAppConfig($routeProvider) {
   $routeProvider.when('/', {
@@ -142,22 +147,6 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
     }
   };
 
-
-// Search for a specified string.
-  $scope.search = function () {
-    $http.get("https://www.googleapis.com/youtube/v3/search", {
-      params: {
-        part: 'picture',
-        q: 'pentakill',
-        type: 'video',
-        key: 'AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI'
-      }
-    })
-        .success(function (data) {
-          console.log(data);
-        })
-  };
-
 });
 
 ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
@@ -260,9 +249,10 @@ ruseHackApp.controller('playerController', function ($scope, $http, $routeParams
   $rootScope.loginButtonVisibility = "display: none";
   //console.log($routeParams);
 //Tuka e za info za videoto
-  $http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
-    console.log(data);
-  });
+  //$http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
+  //  console.log(data);
+  //});
+
 
   $scope.currentProjectUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + $routeParams.id);
 
@@ -270,7 +260,22 @@ ruseHackApp.controller('playerController', function ($scope, $http, $routeParams
 
 
 ruseHackApp.controller('youtubeController', function ($scope, $http, $rootScope) {
-  console.log("yt");
-});
+  $scope.videos = [];
 
-//AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI
+
+  $scope.searchFor = "";
+  $scope.search = function () {
+    $http.get("https://www.googleapis.com/youtube/v3/search", {
+      params: {
+        part: 'snippet',
+        q: $scope.searchFor,
+        type: 'video',
+        key: 'AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI'
+      }
+    }).success(function (data) {
+      $scope.videos = data;
+      console.log(data);
+    })
+  };
+
+});

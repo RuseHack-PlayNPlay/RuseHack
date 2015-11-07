@@ -24,6 +24,7 @@ GET        /public/javascripts/vendor/ng-infinite-scroll.min.js                 
 GET        /public/javascripts/vendor/wow.min.js                                        controllers.Assets.at(path="/public/javascripts/vendor", file="wow.min.js")
 GET        /public/javascripts/app/application.js                                       controllers.Assets.at(path="/public/javascripts/app", file="application.js")
 GET        /public/javascripts/directives/directives.js                                 controllers.Assets.at(path="/public/javascripts/directives", file="directives.js")
+GET        /public/javascripts/filters/filters.js                                       controllers.Assets.at(path="/public/javascripts/filters", file="filters.js")
 GET        /public/javascripts/services/services.js                                     controllers.Assets.at(path="/public/javascripts/services", file="services.js")
 GET        /public/bootstrap-3.3.5-dist/js/bootstrap.min.js                             controllers.Assets.at(path="/public/bootstrap-3.3.5-dist/js", file="bootstrap.min.js")
 #
@@ -45,7 +46,7 @@ GET        /public/bootstrap-3.3.5-dist/fonts/glyphicons-halflings-regular.woff2
 GET        /login.html                                                                  controllers.Assets.at(path="/public/html", file="login.html")
 GET        /movies.html                                                                 controllers.Assets.at(path="/public/html", file="movies.html")
 GET        /player.html                                                                 controllers.Assets.at(path="/public/html", file="player.html")
-GET        /yotubeVideos.html                                                           controllers.Assets.at(path="/public/html", file="youtubeVideos.html")
+GET        /youtubeVideos.html                                                          controllers.Assets.at(path="/public/html", file="youtubeVideos.html")
 #
 
 #yt

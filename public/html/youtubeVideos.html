@@ -1,13 +1,14 @@
-<div ng-if="items.length !== 0" class="text-center">
-  <div infinite-scroll="addMoreItem()" infinite-scroll-distance="1">
-    <div class="row movie-item">
-      <div class="col-md-3 panel panel-wwarning movie-card"
-           ng-repeat="video in ytVideos | limitTo:numberOfItemsToDisplay">
-        <div class="video-panel">
-          <div class="video-thumbnail"><img ng-src="{{item.snippet.thumbnail.high.url}}"></div>
-          <div class="video-title"></div>
-          <div class="video-uploader"></div>
-          </div>
+<button ng-click="search()">SEARCH</button>
+<div class="row text-center">
+  <div ng-repeat="video in videos.items | limitTo:numberOfItemsToDisplay">
+    <div class="col-md-4">
+      <div class="video-panel">
+        <div class="video-thumbnail"><img
+            ng-src="{{video.snippet.thumbnails.medium.url | trusted}}">
+        </div>
+        <div class="movie-title video-title">{{video.snippet.title}}</div>
+        <div class="movie-title video-title">{{video.snippet.channelTitle}}</div>
+        <div class="movie-title video-title">{{video.snippet.publishedAt | datetime}}</div>
       </div>
     </div>
   </div>
