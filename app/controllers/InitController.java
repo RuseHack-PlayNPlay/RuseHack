@@ -51,6 +51,8 @@ public class InitController extends Controller {
         } catch (IOException e) {
             e.printStackTrace();
         }
+ //       movieList = movieDao.getNowPlayingRange(10,10);
+//        System.out.println(Json.toJson(movieList.get(0)));
         return ok();
     }
 }

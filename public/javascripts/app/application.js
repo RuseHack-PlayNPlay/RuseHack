@@ -1,4 +1,4 @@
-var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll']);
+var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', 'services']);
 
 function ruseHackAppConfig($routeProvider) {
   $routeProvider.when('/', {
@@ -9,7 +9,7 @@ function ruseHackAppConfig($routeProvider) {
   })
 
       .otherwise({
-        redirectTo:'/index.html'
+        redirectTo: '/index.html'
       });
 }
 ruseHackApp.config(ruseHackAppConfig);
@@ -82,18 +82,112 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
     });
     return defferred.promise;
   }
+
+  $scope.selectCategory = function (id) {
+    switch (id) {
+      case 0:
+      {
+        $scope.selectedButton0 = "color:#009bdf; border-color:#009bdf";
+        $scope.selectedButton1 = "color:#009bdf; border-color:#009bdf";
+      }
+    }
+  }
 });
 
-ruseHackApp.controller('movieController', function ($scope, $http, $routeParams) {
-  $scope.movieList = [
-    {id: 1, title: "Title", trailerUrl: 'URL'},
-    {id: 2, title: "Title", trailerUrl: 'URL'},
-    {id: 3, title: "Title", trailerUrl: 'URL'},
-    {id: 4, title: "Title", trailerUrl: 'URL'},
-    {id: 5, title: "Title", trailerUrl: 'URL'}
-  ];
+ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao) {
+  //$scope.movieList = [
+  //  {id: 1, title: "Title", trailerUrl: 'URL'},
+  //  {id: 2, title: "Title", trailerUrl: 'URL'},
+  //  {id: 3, title: "Title", trailerUrl: 'URL'},
+  //  {id: 4, title: "Title", trailerUrl: 'URL'},
+  //  {id: 5, title: "Title", trailerUrl: 'URL'}
+  //];
 
-  $scope.addMoreItem = function () {
-    console.log("asd");
+  $scope.current = 0;
+  $scope.step = 10;
+  $scope.numberOfItemsToDisplay = 10;
+  $scope.movieItems = [];
+  $scope.totalCount = 0;
+  $scope.categoryCount = 0;
+  $scope.items = [];
+  $scope.category = $routeParams.category;
+  var flag = false;
+
+  cache.init();
+
+  var totalCount = movieDao.getCount();
+  totalCount.then(function (result) {
+    $scope.totalCount = result;
+  });
+
+  var categoryCount = movieDao.getCountByCategory($scope.category);
+  categoryCount.then(function (result) {
+    $scope.categoryCount = result;
+    flag = true;
+    getMovies();
+  });
+
+  /**
+   * Load movie item in controller scope.
+   */
+  function getMovies() {
+    if (flag == true) {
+      flag = false;
+
+      /**
+       * if cash take from the cache else call function fromServer().
+       */
+      var items = cache.select($scope.category, $scope.current, $scope.step);
+      items.then(function (result) {
+        $scope.items = result;
+        if (result.length > 0 || undefined || null) {
+
+          console.log($scope.items = result)
+          addItems();
+        } else {
+          console.log("from server")
+          fromServer();
+        }
+      }, function (data) {
+        console.log(data);
+      });
+
+      /**
+       * Get item list from server and save in cache.
+       *
+       */
+      function fromServer() {
+        var it = movieDao.getMovieByCategory($scope.category, $scope.current, $scope.step);
+        it.then(function (result) {
+          $scope.items = result;
+          addItems();
+        }).then(function () {
+          cache.insert($scope.items);
+        });
+      }
+
+      /**
+       * Push buffer scope in master scope.
+       */
+      function addItems() {
+        for (var i = 0; i < $scope.items.length; i++) {
+          $scope.movieItems.push($scope.items[i]);
+        }
+        $scope.current = $scope.movieItems.length;
+        flag = true;
+      }
+    }
   }
+  /**
+   * add movie item
+   */
+  $scope.addMoreItem = function () {
+    if ($scope.numberOfItemsToDisplay < $scope.categoryCount) {
+      getMovies();
+      console.dir($scope.movieItems)
+      if ($scope.movieItems.length >= $scope.numberOfItemsToDisplay) {
+        $scope.numberOfItemsToDisplay += 10;
+      }
+    }
+  };
 });

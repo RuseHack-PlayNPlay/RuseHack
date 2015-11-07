@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -42,20 +43,25 @@ public class TmdbServiceImpl implements TmdbService {
     private int getPage(String url) throws IOException {
         System.out.println(url);
         int page = 0;
-        if(url != null){
-            JsonNode result = null;
-            BasicResponseHandler response = new BasicResponseHandler();
-            ObjectMapper mapper = new ObjectMapper();
-            HttpGet httpGet = new HttpGet(url);
-            String responseBody = httpClient.build().execute(httpGet,response);
-            if(responseBody != null ){
-                result = mapper.readTree(responseBody);
+        try {
+            if(url != null){
+                JsonNode result = null;
+                BasicResponseHandler response = new BasicResponseHandler();
+                ObjectMapper mapper = new ObjectMapper();
+                HttpGet httpGet = new HttpGet(url);
+                String responseBody = httpClient.build().execute(httpGet,response);
+                if(responseBody != null ){
+                    result = mapper.readTree(responseBody);
+                }
+                page = result.get("total_pages").asInt();
             }
-            page = result.get("total_pages").asInt();
+            if(page > 20){
+                page = 20;
+            }
+        } catch (HttpResponseException e){
+
         }
-        if(page > 2){
-            page = 2;
-        }
+
 
         return page;
     }
@@ -70,22 +76,27 @@ public class TmdbServiceImpl implements TmdbService {
         BasicResponseHandler response = new BasicResponseHandler();
         ObjectMapper mapper = new ObjectMapper();
         Iterator<JsonNode> iterator = null;
-        for(int i = 1; i < page; i++){
-            newUrl = url + API_KEY + "&"+PARAM_PAGE + i;
-            HttpGet httpGet = new HttpGet(newUrl);
-            String responseBody = httpClient.build().execute(httpGet,response);
-            if(responseBody != null){
-                result = mapper.readTree(responseBody);
+        try {
+            for(int i = 1; i < page; i++){
+                newUrl = url + API_KEY + "&"+PARAM_PAGE + i;
+                HttpGet httpGet = new HttpGet(newUrl);
+                String responseBody = httpClient.build().execute(httpGet,response);
+                if(responseBody != null){
+                    result = mapper.readTree(responseBody);
+                }
+                iterator = result.get("results").elements();
+                while (iterator.hasNext()){
+                    ObjectNode node = (ObjectNode) iterator.next();
+                    node.retain(FILTER);
+                    node.put("category",category);
+                    jsonNodeList.add((JsonNode) node);
+                    System.out.println(node);
+                }
             }
-            iterator = result.get("results").elements();
-            while (iterator.hasNext()){
-                ObjectNode node = (ObjectNode) iterator.next();
-                node.retain(FILTER);
-                node.put("category",category);
-                jsonNodeList.add((JsonNode) node);
-                System.out.println(node);
-            }
+        } catch (HttpResponseException e){
+
         }
+
         System.out.println(Json.toJson(result));
         return jsonNodeList;
     }
@@ -96,21 +107,26 @@ public class TmdbServiceImpl implements TmdbService {
         ObjectMapper mapper = new ObjectMapper();
         String responseBody = null;
         List<JsonNode> resultList = new ArrayList<>();
-        for(int i = 0; i< jsonNodeList.size(); i++){
-            ObjectNode node = (ObjectNode) jsonNodeList.get(i);
-            String url = URL_BY_ID_TRAILER + node.get("id") + "/videos" + API_KEY;
-            System.out.println(url);
-            HttpGet httpGet = new HttpGet(url);
-            responseBody = httpClient.build().execute(httpGet,response);
-            if(responseBody != null){
-                result = (ObjectNode) mapper.readTree(responseBody);
-                if(result.get("results").get(0) != null){
-                    System.out.println(result.get("results").get(0).get("key"));
-                    node.put("key", result.get("results").get(0).get("key").asText());
+        try {
+            for(int i = 0; i< jsonNodeList.size(); i++){
+                ObjectNode node = (ObjectNode) jsonNodeList.get(i);
+                String url = URL_BY_ID_TRAILER + node.get("id") + "/videos" + API_KEY;
+                System.out.println(url);
+                HttpGet httpGet = new HttpGet(url);
+                responseBody = httpClient.build().execute(httpGet,response);
+                if(responseBody != null){
+                    result = (ObjectNode) mapper.readTree(responseBody);
+                    if(result.get("results").get(0) != null){
+                        System.out.println(result.get("results").get(0).get("key"));
+                        node.put("key", result.get("results").get(0).get("key").asText());
+                    }
+                    resultList.add(node);
                 }
-                resultList.add(node);
             }
+        } catch (HttpResponseException e){
+
         }
+
         return  resultList;
     }
 

@@ -25,7 +25,7 @@ public class MovieController extends Controller {
     }
 
     @Transactional(readOnly = true)
-    public Result getMovie(String category ,int limit,int offset){
+    public Result getMovie(String category ,int offset,int limit){
         List<Movie> movieList = new ArrayList<>();
 
          switch (category){
@@ -46,6 +46,7 @@ public class MovieController extends Controller {
      *
      * @return
      */
+    @Transactional
     public Result getCount(){
 
         Long count = movieDao.getCount();
@@ -58,6 +59,7 @@ public class MovieController extends Controller {
      * @param category
      * @return
      */
+    @Transactional
     public Result getCountByCategory(String category){
 
         Long count = null;
@@ -68,7 +70,7 @@ public class MovieController extends Controller {
                 break;
             case "top-rated" : count = movieDao.getCountByCategory("top_rated");
                 break;
-            case "now-playing" : count = movieDao.getCountByCategory("now-playing");
+            case "now-playing" : count = movieDao.getCountByCategory("now_playing");
                 break;
         }
         return  ok(Json.toJson(count));

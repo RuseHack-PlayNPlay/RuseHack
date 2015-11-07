@@ -50,7 +50,7 @@ public class MovieDaoImpl extends BaseDaoImpl<Movie> implements MovieDao {
     @Override
     public List<Movie> getNowPlayingRange(int limit,int offset) {
         EntityManager entityManager = getEntityManager();
-        String find = "select m from Movie m where m.naw_playing = true";
+        String find = "select m from Movie m where m.now_playing = true";
         Query query = entityManager.createQuery(find);
         List<Movie> movieList = query.setFirstResult(offset).setMaxResults(limit).getResultList();
         return movieList;

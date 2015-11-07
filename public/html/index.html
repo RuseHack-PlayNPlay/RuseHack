@@ -41,9 +41,9 @@
   <div class="col-md-7 border-now">
     <div class="btn-container">
       <div class="wow fadeInDown" style={{categoryButtonsVisibility}}>
-        <a ng-href="#/movie/nowPlaying" ng-click="selectCategory(0)" style={{selectedButton0}}>Now Playing</a>
+        <a ng-href="#/movie/now-playing" ng-click="selectCategory(1)" style={{selectedButton1}}>Now Playing</a>
         <a ng-href="#/movie/popular" ng-click="selectCategory(1)" style={{selectedButton1}}>Popular</a>
-        <a ng-href="#/movie/topRated" ng-click="selectCategory(2)" style={{selectedButton2}}>Top Rated</a>
+        <a ng-href="#/movie/top-rated" ng-click="selectCategory(2)" style={{selectedButton2}}>Top Rated</a>
         <a ng-href="#/movie/upcoming" ng-click="selectCategory(3)" style={{selectedButton3}}>Upcoming</a>
       </div>
       <div class="col-md-1 border-now" style={{loginButtonVisibility}}></div>
@@ -71,6 +71,7 @@
 <script src="/public/javascripts/vendor/ng-infinite-scroll.min.js"></script>
 <script src="/public/javascripts/vendor/wow.min.js"></script>
 <script src="/public/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+<script src="/public/javascripts/services/services.js"></script>
 <script src="/public/javascripts/app/application.js"></script>
 </body>
 </html>

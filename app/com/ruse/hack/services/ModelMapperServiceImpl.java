@@ -29,7 +29,7 @@ public class ModelMapperServiceImpl implements  ModelMapperService {
             switch (node.get("category").asText()){
                 case "top_rated": movie.setTop_rated(true);
                     break;
-                case "now-playing": movie.setNaw_playing(true);
+                case "now-playing": movie.setNow_playing(true);
                     break;
                 case "popular": movie.setPopular(true);
                     break;

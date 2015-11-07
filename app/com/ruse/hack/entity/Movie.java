@@ -41,8 +41,8 @@ public class Movie extends  BaseEntity {
     @Column(name = "top_rated")
     private boolean top_rated;
 
-    @Column(name = "naw_playing")
-    private boolean naw_playing;
+    @Column(name = "now_playing")
+    private boolean now_playing;
 
     public int getTmdb_id() {
         return tmdb_id;
@@ -124,12 +124,12 @@ public class Movie extends  BaseEntity {
         this.top_rated = top_rated;
     }
 
-    public boolean isNaw_playing() {
-        return naw_playing;
+    public boolean isNow_playing() {
+        return now_playing;
     }
 
-    public void setNaw_playing(boolean naw_playing) {
-        this.naw_playing = naw_playing;
+    public void setNow_playing(boolean naw_playing) {
+        this.now_playing = naw_playing;
     }
 
     @Override
@@ -143,7 +143,7 @@ public class Movie extends  BaseEntity {
         if (popular != movie.popular) return false;
         if (upcoming != movie.upcoming) return false;
         if (top_rated != movie.top_rated) return false;
-        if (naw_playing != movie.naw_playing) return false;
+        if (now_playing != movie.now_playing) return false;
         if (title != null ? !title.equals(movie.title) : movie.title != null) return false;
         if (overview != null ? !overview.equals(movie.overview) : movie.overview != null) return false;
         if (release_date != null ? !release_date.equals(movie.release_date) : movie.release_date != null) return false;
@@ -165,7 +165,7 @@ public class Movie extends  BaseEntity {
         result = 31 * result + (popular ? 1 : 0);
         result = 31 * result + (upcoming ? 1 : 0);
         result = 31 * result + (top_rated ? 1 : 0);
-        result = 31 * result + (naw_playing ? 1 : 0);
+        result = 31 * result + (now_playing ? 1 : 0);
         return result;
     }
 }
