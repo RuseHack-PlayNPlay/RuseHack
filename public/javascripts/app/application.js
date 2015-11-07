@@ -3,18 +3,9 @@ var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll']);
 function ruseHackAppConfig($routeProvider) {
   $routeProvider.when('/', {
     controller: 'mainController'
-  }).when('/upcoming', {
+  }).when('/movie/:category', {
     controller: 'movieController',
-    templateUrl: 'upcoming.html'
-  }).when('/topRated', {
-    controller: 'movieController',
-    templateUrl: 'topRated.html'
-  }).when('/nowPlaying', {
-    controller: 'movieController',
-    templateUrl: 'nowPlaying.html'
-  }).when('/popular', {
-    controller: 'movieController',
-    templateUrl: 'popular.html'
+    templateUrl: 'movies.html'
   })
 
       .otherwise({
@@ -47,7 +38,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-  $scope.userName = "";
+  $scope.userName = "user";
   $scope.userMail = "";
   $scope.userId = "";
   $scope.userPic = "";
@@ -55,9 +46,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
   $scope.loginButtonVisibility = "display: inline";
   $scope.userPicVisibility = "visibility: hidden";
 
-  console.log("asdsa");
   $scope.login = function () {
-    console.log("login");
     var user = loginFacebook();
     user.then(function (result) {
       $scope.userName = result.name;
@@ -95,6 +84,16 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http) {
   }
 });
 
-ruseHackApp.controller('movieController', function ($scope, $http) {
-  console.log("movie");
+ruseHackApp.controller('movieController', function ($scope, $http, $routeParams) {
+  $scope.movieList = [
+    {id: 1, title: "Title", trailerUrl: 'URL'},
+    {id: 2, title: "Title", trailerUrl: 'URL'},
+    {id: 3, title: "Title", trailerUrl: 'URL'},
+    {id: 4, title: "Title", trailerUrl: 'URL'},
+    {id: 5, title: "Title", trailerUrl: 'URL'}
+  ];
+
+  $scope.addMoreItem = function () {
+    console.log("asd");
+  }
 });

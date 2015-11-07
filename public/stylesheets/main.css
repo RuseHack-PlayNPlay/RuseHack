@@ -2,19 +2,22 @@
 @import url(http://fonts.googleapis.com/css?family=Aldrich);
 
 body {
-  /*background:url('http://7-themes.com/data_images/out/37/6894295-dark-background-wallpaper.jpg');*/
-  background: #000;
+  background: url('http://www.ipages.am/files/companies/1476/template/bg/mmmm.jpg') fixed -100px;
+  /*background:url('http://mohanroop.com/wp-content/uploads/2014/08/film-backgrounda3.jpg') fixed;*/
+  /*background:url('http://3.s3.envato.com/files/1572940/film%20strip4%20590.jpg') fixed;*/
+  /*background-size: cover;*/
+  /*background: #000;*/
   font-family: 'Aldrich', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+  overflow-x: hidden;
 }
 
 .border-now {
-  border: 1px solid white;
+  /*border: 1px solid white;*/
   color: white;
 }
-
 
 /*BUTTON style*/
 
@@ -55,7 +58,7 @@ body {
 }
 
 .btn-container .trailer {
-  color: rgba(186, 186, 186, 0.63);
+  color: rgba(200, 200, 200, 0.63);
   margin-right: 0 !important;
 }
 
@@ -66,9 +69,14 @@ body {
 }
 
 .movie-card {
+  background: rgba(255, 255, 255, 0.4);
   width: 20em;
   height: 33em;
   margin: 1em;
+}
+
+.movie-card:hover {
+  border: 4px solid darkslategray;
 }
 
 .poster-field {
@@ -95,10 +103,24 @@ body {
   text-align: center;
 }
 
-.copyright{
-  color:#269abc;
+.copyright {
+  color: #269abc;
 }
 
-.user-picture {
-  border-radius: 10px;
+.userPic {
+  width: 6em;
+  height: 6em;
+  margin-top: 0.2em;
+  /*margin-bottom: 0.5em;*/
+}
+
+.floating-image {
+  margin-top: 0.7em;
+  float: left;
+}
+
+.floating-text {
+  float: left;
+  margin-top: 1.4em;
+  padding-left: 0.4em;
 }

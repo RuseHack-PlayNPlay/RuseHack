@@ -1,0 +1,31 @@
+<div ng-if="items.length !== 0" class="text-center">
+  <div infinite-scroll="addMoreItem()" infinite-scroll-distance="1">
+    <div class="row movie-item">
+      <div class="col-md-3 panel panel-wwarning movie-card"
+           ng-repeat="item in movieList | limitTo:numberOfItemsToDisplay">
+        <div class="poster-field">
+          <div class="poster">
+            <a>
+              <div>
+                <img class="img-thumbnail"
+                     ng-src=""
+                     src="https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg"
+                     alt="No Poster">
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="title-field">
+          <h3>
+            <span class="movie-title">{{item.title}}</span>
+          </h3>
+        </div>
+        <div class="btn-container">
+          <form>
+            <a type="button" class="trailer">Trailer <i class="glyphicon glyphicon-play"></i></a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
