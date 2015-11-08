@@ -9,7 +9,7 @@ var services = angular.module('services', []);
 services.constant('QUERY', {
     "INVALIDATE": "DELETE FROM ",
     "INSERT": "INSERT INTO CACHE (id,title,overview,release_date,poster_path,vote_average,key,popular,upcoming,top_rated,now_playing) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-    "CREATE": "CREATE TABLE IF NOT EXISTS CACHE (id INTEGER, title BLOB, overview BLOB, release_date BLOB, poster_path BLOB, vote_average BLOB, key BLOB, popular BLOB ,upcoming BLOB, top_rated BLOB, now_playing BLOB,PRIMARY KEY(id))",
+    "CREATE": "CREATE TABLE IF NOT EXISTS CACHE (id BLOB, title BLOB, overview BLOB, release_date BLOB, poster_path BLOB, vote_average BLOB, key BLOB, popular BLOB ,upcoming BLOB, top_rated BLOB, now_playing BLOB,PRIMARY KEY(id))",
     "INDEX_NOW_PLAYING": "CREATE INDEX  IF NOT EXISTS idx_now_playing ON CACHE (now_playing)",
     "INDEX_POPULAR": "CREATE INDEX  IF NOT EXISTS idx_popular ON CACHE (popular)",
     "INDEX_TOP_RATED": "CREATE INDEX  IF NOT EXISTS idx_top_rated ON CACHE (top_rated)",
@@ -65,7 +65,7 @@ services.service('movieDao', function ($http, $q) {
         }).success(function (data) {
             deferred.resolve(data);
         }).error(function (data) {
-            deferred.reject(data);
+            //deferred.reject(data);
         });
         return deferred.promise;
     };
@@ -211,7 +211,7 @@ services.service('cache', function ($http, $q,QUERY) {
      * @param err
      */
     function onError(err) {
-        //console.log(err);
+        console.log(err);
     }
 });
 

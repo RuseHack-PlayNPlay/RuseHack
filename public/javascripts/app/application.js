@@ -30,7 +30,7 @@ ruseHackApp.config(ruseHackAppConfig);
 ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope, cache) {
 
   $(document).ready(function () {
-    cache.invalidate('CACHE');
+    //cache.invalidate('CACHE');
     var preloader = $('.preloader');
     $(window).load(function(){
       preloader.remove();
@@ -245,6 +245,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
             addItems();
           }).then(function () {
             cache.insert($scope.items);
+
           });
         }
 
