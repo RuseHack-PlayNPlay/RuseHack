@@ -186,9 +186,9 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
 
 });
 
-ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
+ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao) {
+  $scope.showMovieInfo = "visibility: hidden";
   if ($routeParams.category) {
-    $rootScope.mainTitle = "The media is in your hands!";
     $scope.current = 0;
     $scope.step = 10;
     $scope.numberOfItemsToDisplay = 10;
@@ -198,7 +198,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
     $scope.items = [];
     $scope.category = $routeParams.category;
     var flag = false;
-
+    $scope.showMovieInfo = "visibility: hidden";
     cache.init();
 
     var totalCount = movieDao.getCount();
@@ -228,6 +228,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         items.then(function (result) {
           $scope.items = result;
           if (result.length > 0 || undefined || null) {
+            addItems();
           } else {
             fromServer();
           }

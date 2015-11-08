@@ -7,8 +7,10 @@
       <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/top-rated" ng-click="selectCategory(4)" style={{selectedButton4}}>Top Rated</a>
       <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/upcoming" ng-click="selectCategory(5)" style={{selectedButton5}}>Upcoming</a>
     </div>
-    <div class="info">Total Movies: {{totalCount}}</div>
-    <div class="text-capitalize">{{category}}: {{categoryCount}}</div>
+    <div style={{showMovieInfo}}>
+      <div class="info">Total Movies: {{totalCount}}</div>
+      <div class="text-capitalize">{{category}}: {{categoryCount}}</div>
+    </div>
   </div>
   <div class="col-md-1"></div>
 </div>
@@ -44,10 +46,8 @@
         </h5>
 
         <div class="caption">
-          <form>
-            <a type="button" ng-href="#/player/{{item.key}}/{{item.title}}" class="btn btn-start catButton"
-               target="_blank">Trailer <i class="glyphicon glyphicon-play"></i></a>
-          </form>
+          <a type="button" ng-href="#/player/{{item.key}}/{{item.title}}" class="btn btn-start catButton"
+             target="_blank">Trailer <i class="glyphicon glyphicon-play"></i></a>
         </div>
       </div>
     </div>
