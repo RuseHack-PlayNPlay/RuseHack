@@ -30,19 +30,18 @@ ruseHackApp.config(ruseHackAppConfig);
 ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope, cache) {
 
   $(document).ready(function () {
-    //cache.invalidate('CACHE');
+    cache.invalidate('CACHE');
     var preloader = $('.preloader');
-    $(window).load(function () {
+    $(window).load(function(){
       preloader.remove();
     });
 
     //#main-slider
     var slideHeight = $(window).height();
-    $('#home-slider .item').css('height', slideHeight);
+    $('#home-slider .item').css('height',slideHeight);
 
-    $(window).resize(function () {
-      'use strict',
-          $('#home-slider .item').css('height', slideHeight);
+    $(window).resize(function(){'use strict',
+        $('#home-slider .item').css('height',slideHeight);
     });
 
     new WOW().init();
@@ -114,18 +113,71 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
   }
 
 
-  $scope.selectCategory = function (id) {
+  $rootScope.selectCategory = function (id) {
     switch (id) {
       case 0:
       {
-        $scope.selectedButton0 = "border-color:#036dc0";
-        $scope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
       }
         break;
       case 1:
       {
-        $scope.selectedButton0 = "border-color:white";
-        $scope.selectedButton1 = "border-color:#036dc0";
+
+        $rootScope.selectedButton0 = "border-color:white";
+        $rootScope.selectedButton1 = "border-color:#009bdf";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
+      }
+        break;
+      case 2:
+      {
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:#009bdf";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
+      }
+        break;
+      case 3:
+      {
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:#009bdf";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
+      }
+        break;
+      case 4:
+      {
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:#009bdf";
+        $rootScope.selectedButton5 = "border-color:white";
+      }
+        break;
+      case 5:
+      {
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:#009bdf";
       }
         break;
       default:
@@ -136,6 +188,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
 
 ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
   if ($routeParams.category) {
+    $rootScope.mainTitle = "The media is in your hands!";
     $scope.current = 0;
     $scope.step = 10;
     $scope.numberOfItemsToDisplay = 10;
@@ -175,7 +228,6 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         items.then(function (result) {
           $scope.items = result;
           if (result.length > 0 || undefined || null) {
-            addItems();
           } else {
             fromServer();
           }
@@ -219,6 +271,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         }
       }
     };
+  } else {
   }
 });
 
