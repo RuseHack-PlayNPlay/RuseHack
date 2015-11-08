@@ -195,7 +195,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
     $scope.movieItems = [];
     $scope.totalCount = 0;
     $scope.categoryCount = 0;
-    $scope.items = [];
+    $scope.buffer = [];
     $scope.category = $routeParams.category;
     var flag = false;
     $scope.showMovieInfo = "visibility: visible";
@@ -226,7 +226,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
          */
         var items = cache.select($scope.category, $scope.current, $scope.step);
         items.then(function (result) {
-          $scope.items = result;
+          $scope.buffer = result;
           if (result.length > 0 || undefined || null) {
             addItems();
           } else {
@@ -241,10 +241,10 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         function fromServer() {
           var it = movieDao.getMovieByCategory($scope.category, $scope.current, $scope.step);
           it.then(function (result) {
-            $scope.items = result;
+            $scope.buffer = result;
             addItems();
           }).then(function () {
-            cache.insert($scope.items);
+            cache.insert($scope.buffer);
 
           });
         }
@@ -253,8 +253,8 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
          * Push buffer scope in master scope.
          */
         function addItems() {
-          for (var i = 0; i < $scope.items.length; i++) {
-            $scope.movieItems.push($scope.items[i]);
+          for (var i = 0; i < $scope.buffer.length; i++) {
+            $scope.movieItems.push($scope.buffer[i]);
           }
           $scope.current = $scope.movieItems.length;
           flag = true;
