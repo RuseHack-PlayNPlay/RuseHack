@@ -117,7 +117,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
     switch (id) {
       case 0:
       {
-        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton0 = "border-color:#036dc0";
         $rootScope.selectedButton1 = "border-color:white";
         $rootScope.selectedButton2 = "border-color:white";
         $rootScope.selectedButton3 = "border-color:white";
@@ -129,7 +129,7 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
       {
 
         $rootScope.selectedButton0 = "border-color:white";
-        $rootScope.selectedButton1 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:#036dc0";
         $rootScope.selectedButton2 = "border-color:white";
         $rootScope.selectedButton3 = "border-color:white";
         $rootScope.selectedButton4 = "border-color:white";
@@ -139,9 +139,9 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
       case 2:
       {
 
-        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton0 = "border-color:#036dc0";
         $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:#009bdf";
+        $rootScope.selectedButton2 = "border-color:#036dc0";
         $rootScope.selectedButton3 = "border-color:white";
         $rootScope.selectedButton4 = "border-color:white";
         $rootScope.selectedButton5 = "border-color:white";
@@ -150,10 +150,10 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
       case 3:
       {
 
-        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton0 = "border-color:#036dc0";
         $rootScope.selectedButton1 = "border-color:white";
         $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:#009bdf";
+        $rootScope.selectedButton3 = "border-color:#036dc0";
         $rootScope.selectedButton4 = "border-color:white";
         $rootScope.selectedButton5 = "border-color:white";
       }
@@ -161,23 +161,23 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
       case 4:
       {
 
-        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton0 = "border-color:#036dc0";
         $rootScope.selectedButton1 = "border-color:white";
         $rootScope.selectedButton2 = "border-color:white";
         $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:#009bdf";
+        $rootScope.selectedButton4 = "border-color:#036dc0";
         $rootScope.selectedButton5 = "border-color:white";
       }
         break;
       case 5:
       {
 
-        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton0 = "border-color:#036dc0";
         $rootScope.selectedButton1 = "border-color:white";
         $rootScope.selectedButton2 = "border-color:white";
         $rootScope.selectedButton3 = "border-color:white";
         $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:#009bdf";
+        $rootScope.selectedButton5 = "border-color:#036dc0";
       }
         break;
       default:
