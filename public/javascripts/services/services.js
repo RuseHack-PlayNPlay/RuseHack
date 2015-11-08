@@ -178,11 +178,9 @@ services.service('cache', function ($http, $q,QUERY) {
      * @returns {promise.promise|Function|*|jQuery.promise|d.promise|promise}
      */
     function selectByRange(cat,start,end) {
-       console.log(cat);
         var deferred = $q.defer();
         var dbConn = openDatabase("CACHE", "1.0", "VIDEO", 50 * 1024 * 1024);
         var query = "SELECT * FROM CACHE WHERE " + cat + " = 'true' order by release_date desc, title ASC" + " LIMIT " + start + "," + end;
-        console.log(query);
         dbConn.transaction(function (tx) {
             tx.executeSql(query, [], function (tx, results) {
                 var items = [];
@@ -191,7 +189,6 @@ services.service('cache', function ($http, $q,QUERY) {
                 }
                 deferred.resolve(items);
             }, function (err) {
-                console.log('aaaaa')
                 deferred.reject(err);
             });
         });

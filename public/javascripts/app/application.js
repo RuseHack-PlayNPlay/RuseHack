@@ -198,7 +198,7 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
     $scope.items = [];
     $scope.category = $routeParams.category;
     var flag = false;
-    $scope.showMovieInfo = "visibility: hidden";
+    $scope.showMovieInfo = "visibility: visible";
     cache.init();
 
     var totalCount = movieDao.getCount();
@@ -272,7 +272,6 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         }
       }
     };
-  } else {
   }
 });
 
