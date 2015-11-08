@@ -40,18 +40,13 @@
   <div class="col-md-10 border-now text-center">
     <div class="btn-container">
       <div class="wow fadeInDown" style={{categoryButtonsVisibility}}>
-        <a ng-href="#/movie/now-playing" ng-click="selectCategory(0)" style={{selectedButton0}}>Now
-          Playing</a>
-        <a ng-href="#/movie/popular" ng-click="selectCategory(1)"
-           style={{selectedButton1}}>Popular</a>
-        <a ng-href="#/movie/top-rated" ng-click="selectCategory(2)" style={{selectedButton2}}>Top
-          Rated</a>
-        <a ng-href="#/movie/upcoming" ng-click="selectCategory(3)" style={{selectedButton3}}>Upcoming</a>
-        <a ng-href="#/ytVideos" ng-click="selectCategory(4)" style={{selectedButton4}}>YouTube</a>
+        <a name="beginning" ng-href="#/movies" ng-click="selectCategory(0)" style={{selectedButton0}}>Movies</a>
+        <a ng-href="#/youtubeVideos" ng-click="selectCategory(1)" style={{selectedButton1}}>YouTube</a>
       </div>
       <div class="col-md-1 border-now" style={{loginButtonVisibility}}></div>
       <div class="col-md-10">
-        <a class="wow fadeInDown" ng-click="login()" style={{loginButtonVisibility}}>Login with facebook</a>
+        <a class="wow fadeInDown" ng-click="login()" style={{loginButtonVisibility}}>Login with
+          facebook</a>
       </div>
       <div class="col-md-1"></div>
     </div>
@@ -66,7 +61,12 @@
   <div class="col-md-1 border-now">
   </div>
 </div>
-
+<div class="footer">
+  <div class="row">
+    <div class="col-md-11"></div>
+    <div class="col-md-1"><a href="#beginning"><span class="glyphicon glyphicon-arrow-up back-to-top-button"></span></a></div>
+  </div>
+</div>
 <script src="/public/javascripts/vendor/jquery-2.1.4.min.js"></script>
 <script src="/public/javascripts/vendor/angular.min.js"></script>
 <script src="/public/javascripts/vendor/angular-route.min.js"></script>

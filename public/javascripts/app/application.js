@@ -1,4 +1,3 @@
-
 //YOUTUBE API KEY AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI
 //FACEBOOK API KEY 641232165979215
 
@@ -8,7 +7,10 @@ var ruseHackApp = angular.module('ruseHackApp', ['ngRoute', 'infinite-scroll', '
 function ruseHackAppConfig($routeProvider) {
   $routeProvider.when('/', {
     controller: 'mainController'
-  }).when('/movie/:category', {
+  }).when('/movies', {
+    controller: 'movieController',
+    templateUrl: 'movies.html'
+  }).when('/movies/:category', {
     controller: 'movieController',
     templateUrl: 'movies.html'
   }).when('/player/:id/:title', {
@@ -16,7 +18,7 @@ function ruseHackAppConfig($routeProvider) {
     templateUrl: 'player.html'
   }).when('/youtubeVideos', {
     controller: 'youtubeController',
-    template: 'youtubeVideos.html'
+    templateUrl: 'youtubeVideos.html'
   })
 
       .otherwise({
@@ -96,51 +98,77 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
     return defferred.promise;
   }
 
-  $scope.selectCategory = function (id) {
+  $rootScope.selectCategory = function (id) {
     switch (id) {
       case 0:
       {
-        $scope.selectedButton0 = "border-color:#009bdf";
-        $scope.selectedButton1 = "border-color:white";
-        $scope.selectedButton2 = "border-color:white";
-        $scope.selectedButton3 = "border-color:white";
-        $scope.selectedButton4 = "border-color:white";
+        console.log(id);
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
       }
         break;
       case 1:
       {
-        $scope.selectedButton0 = "border-color:white";
-        $scope.selectedButton1 = "border-color:#009bdf";
-        $scope.selectedButton2 = "border-color:white";
-        $scope.selectedButton3 = "border-color:white";
-        $scope.selectedButton4 = "border-color:white";
+        console.log(id);
+
+        $rootScope.selectedButton0 = "border-color:white";
+        $rootScope.selectedButton1 = "border-color:#009bdf";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
       }
         break;
       case 2:
       {
-        $scope.selectedButton0 = "border-color:white";
-        $scope.selectedButton1 = "border-color:white";
-        $scope.selectedButton2 = "border-color:#009bdf";
-        $scope.selectedButton3 = "border-color:white";
-        $scope.selectedButton4 = "border-color:white";
+        console.log(id);
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:#009bdf";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
       }
         break;
       case 3:
       {
-        $scope.selectedButton0 = "border-color:white";
-        $scope.selectedButton1 = "border-color:white";
-        $scope.selectedButton2 = "border-color:white";
-        $scope.selectedButton3 = "border-color:#009bdf";
-        $scope.selectedButton4 = "border-color:white";
+        console.log(id);
 
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:#009bdf";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:white";
       }
         break;
-      case 4: {
-        $scope.selectedButton0 = "border-color:white";
-        $scope.selectedButton1 = "border-color:white";
-        $scope.selectedButton2 = "border-color:white";
-        $scope.selectedButton3 = "border-color:white";
-        $scope.selectedButton4 = "border-color:#009bdf";
+      case 4:
+      {
+        console.log(id);
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:#009bdf";
+        $rootScope.selectedButton5 = "border-color:white";
+      }
+        break;
+      case 5:
+      {
+        console.log(id);
+
+        $rootScope.selectedButton0 = "border-color:#009bdf";
+        $rootScope.selectedButton1 = "border-color:white";
+        $rootScope.selectedButton2 = "border-color:white";
+        $rootScope.selectedButton3 = "border-color:white";
+        $rootScope.selectedButton4 = "border-color:white";
+        $rootScope.selectedButton5 = "border-color:#009bdf";
       }
         break;
       default:
@@ -150,131 +178,125 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
 });
 
 ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
+  if ($routeParams.category) {
+    $rootScope.mainTitle = "The media is in your hands!";
+    $scope.current = 0;
+    $scope.step = 10;
+    $scope.numberOfItemsToDisplay = 10;
+    $scope.movieItems = [];
+    $scope.totalCount = 0;
+    $scope.categoryCount = 0;
+    $scope.items = [];
+    $scope.category = $routeParams.category;
+    var flag = false;
 
-  $rootScope.mainTitle = "The media is in your hands!";
-  $scope.current = 0;
-  $scope.step = 10;
-  $scope.numberOfItemsToDisplay = 10;
-  $scope.movieItems = [];
-  $scope.totalCount = 0;
-  $scope.categoryCount = 0;
-  $scope.items = [];
-  $scope.category = $routeParams.category;
-  var flag = false;
+    cache.init();
 
-  cache.init();
+    var totalCount = movieDao.getCount();
+    totalCount.then(function (result) {
+      $scope.totalCount = result;
+    });
 
-  var totalCount = movieDao.getCount();
-  totalCount.then(function (result) {
-    $scope.totalCount = result;
-  });
+    var categoryCount = movieDao.getCountByCategory($scope.category);
 
-  var categoryCount = movieDao.getCountByCategory($scope.category);
-  console.log($scope.category);
-
-  categoryCount.then(function (result) {
-    $scope.categoryCount = result;
-    flag = true;
-    getMovies();
-  });
-
-  /**
-   * Load movie item in controller scope.
-   */
-  function getMovies() {
-    if (flag == true) {
-      flag = false;
-
-      /**
-       * if cash take from the cache else call function fromServer().
-       */
-      var items = cache.select($scope.category, $scope.current, $scope.step);
-      items.then(function (result) {
-        $scope.items = result;
-        if (result.length > 0 || undefined || null) {
-
-          console.log($scope.items = result);
-          addItems();
-        } else {
-          console.log("from server");
-          fromServer();
-        }
-      }, function (data) {
-        console.log(data);
-      });
-
-      /**
-       * Get item list from server and save in cache.
-       *
-       */
-      function fromServer() {
-        var it = movieDao.getMovieByCategory($scope.category, $scope.current, $scope.step);
-        it.then(function (result) {
-          $scope.items = result;
-          addItems();
-        }).then(function () {
-          cache.insert($scope.items);
-        });
-      }
-
-      /**
-       * Push buffer scope in master scope.
-       */
-      function addItems() {
-        for (var i = 0; i < $scope.items.length; i++) {
-          $scope.movieItems.push($scope.items[i]);
-        }
-        $scope.current = $scope.movieItems.length;
-        flag = true;
-      }
-    }
-  }
-
-  /**
-   * add movie item
-   */
-  $scope.addMoreItem = function () {
-    if ($scope.numberOfItemsToDisplay < $scope.categoryCount) {
+    categoryCount.then(function (result) {
+      $scope.categoryCount = result;
+      flag = true;
       getMovies();
-      console.dir($scope.movieItems);
-      if ($scope.movieItems.length >= $scope.numberOfItemsToDisplay) {
-        $scope.numberOfItemsToDisplay += 10;
+    });
+
+    /**
+     * Load movie item in controller scope.
+     */
+    function getMovies() {
+      if (flag == true) {
+        flag = false;
+
+        /**
+         * if cash take from the cache else call function fromServer().
+         */
+        var items = cache.select($scope.category, $scope.current, $scope.step);
+        items.then(function (result) {
+          $scope.items = result;
+          if (result.length > 0 || undefined || null) {
+
+            console.log($scope.items = result);
+            addItems();
+          } else {
+            console.log("from server");
+            fromServer();
+          }
+        }, function (data) {
+          console.log(data);
+        });
+
+        /**
+         * Get item list from server and save in cache.
+         *
+         */
+        function fromServer() {
+          var it = movieDao.getMovieByCategory($scope.category, $scope.current, $scope.step);
+          it.then(function (result) {
+            $scope.items = result;
+            addItems();
+          }).then(function () {
+            cache.insert($scope.items);
+          });
+        }
+
+        /**
+         * Push buffer scope in master scope.
+         */
+        function addItems() {
+          for (var i = 0; i < $scope.items.length; i++) {
+            $scope.movieItems.push($scope.items[i]);
+          }
+          $scope.current = $scope.movieItems.length;
+          flag = true;
+        }
       }
     }
-  };
+
+    /**
+     * add movie item
+     */
+    $scope.addMoreItem = function () {
+      if ($scope.numberOfItemsToDisplay < $scope.categoryCount) {
+        getMovies();
+        console.dir($scope.movieItems);
+        if ($scope.movieItems.length >= $scope.numberOfItemsToDisplay) {
+          $scope.numberOfItemsToDisplay += 10;
+        }
+      }
+    };
+  } else {
+    console.log("movies");
+  }
 });
 
 ruseHackApp.controller('playerController', function ($scope, $http, $routeParams, $sce, $rootScope) {
   $rootScope.mainTitle = $routeParams.title;
   $rootScope.loginButtonVisibility = "display: none";
-  //console.log($routeParams);
-//Tuka e za info za videoto
-  //$http.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + $routeParams.id + "&key=AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI").success(function(data) {
-  //  console.log(data);
-  //});
-
-
+  $rootScope.categoryButtonsVisibility = "display: none";
   $scope.currentProjectUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + $routeParams.id);
-
 });
 
 
-ruseHackApp.controller('youtubeController', function ($scope, $http, $rootScope) {
+ruseHackApp.controller('youtubeController', function ($scope, $http) {
   $scope.videos = [];
-
-
   $scope.searchFor = "";
+
   $scope.search = function () {
     $http.get("https://www.googleapis.com/youtube/v3/search", {
       params: {
         part: 'snippet',
         q: $scope.searchFor,
         type: 'video',
+        maxResults: 50,
         key: 'AIzaSyDWfWekjSirbbcW5C3ziEUlOzzNiznOZSI'
       }
     }).success(function (data) {
       $scope.videos = data;
-      console.log(data);
     })
   };
 
