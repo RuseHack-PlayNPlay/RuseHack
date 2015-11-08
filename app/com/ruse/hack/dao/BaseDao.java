@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Created by omisoft on 11/6/15.
+ * Created by nslavov on 11/6/15.
  */
 public interface BaseDao<T extends BaseEntity> {
 

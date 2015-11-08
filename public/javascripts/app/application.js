@@ -27,10 +27,24 @@ function ruseHackAppConfig($routeProvider) {
 }
 ruseHackApp.config(ruseHackAppConfig);
 
-ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope) {
-  $rootScope.mainTitle = "The media is in your hands!";
+ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope, cache) {
 
   $(document).ready(function () {
+    //cache.invalidate('CACHE');
+    var preloader = $('.preloader');
+    $(window).load(function () {
+      preloader.remove();
+    });
+
+    //#main-slider
+    var slideHeight = $(window).height();
+    $('#home-slider .item').css('height', slideHeight);
+
+    $(window).resize(function () {
+      'use strict',
+          $('#home-slider .item').css('height', slideHeight);
+    });
+
     new WOW().init();
   });
 
@@ -53,6 +67,8 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
+  $rootScope.testDisplay = "display: initial";
+
   $scope.userName = "user";
   $scope.userMail = "";
   $scope.userId = "";
@@ -69,9 +85,8 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
       $scope.userId = result.id;
       setPic(result.id).then(function (response) {
         $scope.userPic = response.data.url;
-        $scope.categoryButtonsVisibility = "display:inline";
-        $scope.loginButtonVisibility = "display: none";
         $scope.userPicVisibility = "visibility: visible";
+        $rootScope.testDisplay = "display:none";
       })
     });
   };
@@ -98,77 +113,19 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
     return defferred.promise;
   }
 
-  $rootScope.selectCategory = function (id) {
+
+  $scope.selectCategory = function (id) {
     switch (id) {
       case 0:
       {
-        console.log(id);
-        $rootScope.selectedButton0 = "border-color:#009bdf";
-        $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:white";
+        $scope.selectedButton0 = "border-color:#036dc0";
+        $scope.selectedButton1 = "border-color:white";
       }
         break;
       case 1:
       {
-        console.log(id);
-
-        $rootScope.selectedButton0 = "border-color:white";
-        $rootScope.selectedButton1 = "border-color:#009bdf";
-        $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:white";
-      }
-        break;
-      case 2:
-      {
-        console.log(id);
-
-        $rootScope.selectedButton0 = "border-color:#009bdf";
-        $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:#009bdf";
-        $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:white";
-      }
-        break;
-      case 3:
-      {
-        console.log(id);
-
-        $rootScope.selectedButton0 = "border-color:#009bdf";
-        $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:#009bdf";
-        $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:white";
-      }
-        break;
-      case 4:
-      {
-        console.log(id);
-
-        $rootScope.selectedButton0 = "border-color:#009bdf";
-        $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:#009bdf";
-        $rootScope.selectedButton5 = "border-color:white";
-      }
-        break;
-      case 5:
-      {
-        console.log(id);
-
-        $rootScope.selectedButton0 = "border-color:#009bdf";
-        $rootScope.selectedButton1 = "border-color:white";
-        $rootScope.selectedButton2 = "border-color:white";
-        $rootScope.selectedButton3 = "border-color:white";
-        $rootScope.selectedButton4 = "border-color:white";
-        $rootScope.selectedButton5 = "border-color:#009bdf";
+        $scope.selectedButton0 = "border-color:white";
+        $scope.selectedButton1 = "border-color:#036dc0";
       }
         break;
       default:
@@ -179,7 +136,6 @@ ruseHackApp.controller('mainController', function ($q, $scope, $http, $rootScope
 
 ruseHackApp.controller('movieController', function ($scope, $http, $routeParams, cache, movieDao, $rootScope) {
   if ($routeParams.category) {
-    $rootScope.mainTitle = "The media is in your hands!";
     $scope.current = 0;
     $scope.step = 10;
     $scope.numberOfItemsToDisplay = 10;
@@ -219,15 +175,10 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
         items.then(function (result) {
           $scope.items = result;
           if (result.length > 0 || undefined || null) {
-
-            console.log($scope.items = result);
             addItems();
           } else {
-            console.log("from server");
             fromServer();
           }
-        }, function (data) {
-          console.log(data);
         });
 
         /**
@@ -263,20 +214,17 @@ ruseHackApp.controller('movieController', function ($scope, $http, $routeParams,
     $scope.addMoreItem = function () {
       if ($scope.numberOfItemsToDisplay < $scope.categoryCount) {
         getMovies();
-        console.dir($scope.movieItems);
         if ($scope.movieItems.length >= $scope.numberOfItemsToDisplay) {
           $scope.numberOfItemsToDisplay += 10;
         }
       }
     };
-  } else {
-    console.log("movies");
   }
 });
 
 ruseHackApp.controller('playerController', function ($scope, $http, $routeParams, $sce, $rootScope) {
-  $rootScope.mainTitle = $routeParams.title;
-  $rootScope.loginButtonVisibility = "display: none";
+  $rootScope.testDisplay = "display: none";
+  $scope.currentTitle = $routeParams.title;
   $rootScope.categoryButtonsVisibility = "display: none";
   $scope.currentProjectUrl = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + $routeParams.id);
 });

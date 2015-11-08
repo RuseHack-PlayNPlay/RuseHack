@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by omisoft on 11/7/15.
+ * Created by nslavov on 11/7/15.
  */
 public class InitController extends Controller {
 

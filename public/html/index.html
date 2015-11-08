@@ -4,70 +4,72 @@
   <meta charset="UTF-8">
   <title></title>
   <link rel="stylesheet" href="/public/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/public/stylesheets/animate.css">
-  <link rel="stylesheet" href="/public/stylesheets/responsive.css">
   <link rel="stylesheet" href="/public/stylesheets/main.css">
+  <link rel="stylesheet" href="/public/stylesheets/animate.min.css">
+  <link id="css-preset" href="/public/stylesheets/presets/preset1.css" rel="stylesheet">
+  <link href="/public/stylesheets/font-awesome.min.css" rel="stylesheet">
+  <link href="/public/stylesheets/responsive.css" rel="stylesheet">
 </head>
 <body ng-app="ruseHackApp" ng-controller="mainController">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 border-now">
-      <div style={{userPicVisibility}}>
-        <a class="floating-image" ng-href="http://www.facebook.com/{{userId}}" target="_blank">
-          <img class=" img-circle userPic" src="" alt="" ng-src="{{userPic}}">
-        </a>
+<div class="preloader"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+<!--/.preloader-->
 
-        <div class="floating-text">
-          <h4 class="">{{userName}}</h4>
-          <h5 class="">{{userMail}}</h5>
+<header id="home" style={{testDisplay}}>
+  <div id="home-slider" class="carousel slide carousel-fade" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="item active" style="background-image: url(http://marketingland.com/wp-content/ml-loads/2014/08/video-tv2-ss-1920.jpg)">
+        <div class="caption">
+          <h1 class="animated fadeInLeftBig">Welcome to <span>Play Portal</span></h1>
+
+          <p class="animated fadeInRightBig">The most complete media experience!</p>
+          <a data-scroll class="btn btn-start animated fadeInUpBig" ng-click="login()">Login with facebook</a>
+        </div>
+      </div>
+      <div class="item" style="background-image: url(http://www.expanddigital.co.uk/wp-content/uploads/2015/06/VideoMarketingHeader1.jpg)">
+        <div class="caption">
+          <h1 class="animated fadeInLeftBig">Welcome to <span>Play Portal</span></span></h1>
+
+          <p class="animated fadeInRightBig">All kinds of entertainment in one portal!</p>
+          <a data-scroll class="btn btn-start animated fadeInUpBig" ng-click="login()">Login with facebook</a>
         </div>
       </div>
     </div>
-    <div class="col-md-4 border-now text-center"><h3 class="wow fadeInDown">{{mainTitle}}</h3>
-    </div>
-    <div class="col-md-4 border-now"></div>
-  </div>
-  <div class="row">
-    <div class="col-md-5"></div>
-    <div class="col-md-2">
+    <a class="left-control" href="#home-slider" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+    <a class="right-control" href="#home-slider" data-slide="next"><i class="fa fa-angle-right"></i></a>
 
+    <a id="tohash" href="#services"><i class="fa fa-angle-down"></i></a>
+
+  </div>
+
+</header>
+<div class="main-nav">
+  <div style={{userPicVisibility}}>
+    <div class="img-container">
+      <a class="floating-image" ng-href="http://www.facebook.com/{{userId}}" target="_blank">
+        <img class=" img-circle userPic" src="" alt="" ng-src="{{userPic}}">
+      </a>
+
+      <div class="floating-text">
+        <h4 class="">{{userName}}</h4>
+        <h5 class="">{{userMail}}</h5>
+      </div>
     </div>
   </div>
-  <div class="col-md-5"></div>
-</div>
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-10 border-now text-center">
-    <div class="btn-container">
-      <div class="wow fadeInDown" style={{categoryButtonsVisibility}}>
-        <a name="beginning" ng-href="#/movies" ng-click="selectCategory(0)" style={{selectedButton0}}>Movies</a>
-        <a ng-href="#/youtubeVideos" ng-click="selectCategory(1)" style={{selectedButton1}}>YouTube</a>
-      </div>
-      <div class="col-md-1 border-now" style={{loginButtonVisibility}}></div>
-      <div class="col-md-10">
-        <a class="wow fadeInDown" ng-click="login()" style={{loginButtonVisibility}}>Login with
-          facebook</a>
-      </div>
-      <div class="col-md-1"></div>
+  <div class="">
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a class="border-on-link" ng-href="#/movies" ng-click="selectCategory(0)" style={{selectedButton0}}>Movies</a></li>
+        <li><a class="border-on-link" ng-href="#/youtubeVideos"  ng-click="selectCategory(1)" style={{selectedButton1}}>YouTube</a></li>
+      </ul>
     </div>
   </div>
-  <div class="col-md-2 border-now"></div>
 </div>
-<div class="row">
-  <div class="col-md-1 border-now"></div>
-  <div class="col-md-10 border-now">
-    <div ng-view></div>
-  </div>
-  <div class="col-md-1 border-now">
-  </div>
-</div>
-<div class="footer">
-  <div class="row">
-    <div class="col-md-11"></div>
-    <div class="col-md-1"><a href="#beginning"><span class="glyphicon glyphicon-arrow-up back-to-top-button"></span></a></div>
-  </div>
-</div>
+<section id="team" ng-view>
+</section>
+<!--/#home-->
 <script src="/public/javascripts/vendor/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="/public/javascripts/vendor/jquery.js"></script>
+<script type="text/javascript" src="/public/javascripts/vendor/wow.min.js"></script>
 <script src="/public/javascripts/vendor/angular.min.js"></script>
 <script src="/public/javascripts/vendor/angular-route.min.js"></script>
 <script src="/public/javascripts/vendor/jquery.easing.1.3.js"></script>

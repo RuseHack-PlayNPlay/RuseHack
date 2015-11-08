@@ -1,11 +1,11 @@
 <div class="row text-center">
   <div class="col-md-1"></div>
   <div class="col-md-10">
-    <div class="btn-container">
-      <a ng-href="#/movies/now-playing" ng-click="selectCategory(2)" style={{selectedButton2}}>Now Playing</a>
-      <a ng-href="#/movies/popular" ng-click="selectCategory(3)" style={{selectedButton3}}>Popular</a>
-      <a ng-href="#/movies/top-rated" ng-click="selectCategory(4)" style={{selectedButton4}}>Top Rated</a>
-      <a ng-href="#/movies/upcoming" ng-click="selectCategory(5)" style={{selectedButton5}}>Upcoming</a>
+    <div class="caption padding-otdolu">
+      <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/now-playing" ng-click="selectCategory(2)" style={{selectedButton2}}>Now Playing</a>
+      <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/popular" ng-click="selectCategory(3)" style={{selectedButton3}}>Popular</a>
+      <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/top-rated" ng-click="selectCategory(4)" style={{selectedButton4}}>Top Rated</a>
+      <a data-scroll class="btn btn-start animated fadeInUp catButton" ng-href="#/movies/upcoming" ng-click="selectCategory(5)" style={{selectedButton5}}>Upcoming</a>
     </div>
   </div>
   <div class="col-md-1"></div>
@@ -21,10 +21,10 @@
             <a>
               <div>
                 <a ng-href="#/player/{{item.key}}/{{item.title}}" target="_blank">
-                <img class="img-thumbnail"
-                     ng-src="http://image.tmdb.org/t/p/original{{item.poster_path}}"
-                     err-Src="https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg"
-                     alt="No Poster"></a>
+                  <img class="img-thumbnail"
+                       ng-src="http://image.tmdb.org/t/p/original{{item.poster_path}}"
+                       err-Src="https://cdn.amctheatres.com/Media/Default/Images/noposter.jpg"
+                       alt="No Poster"></a>
               </div>
             </a>
           </div>
@@ -41,9 +41,9 @@
           <span class="">Rating: {{item.vote_average}}</span>
         </h5>
 
-        <div class="btn-container">
+        <div class="caption">
           <form>
-            <a type="button" ng-href="#/player/{{item.key}}/{{item.title}}" class="trailer"
+            <a type="button" ng-href="#/player/{{item.key}}/{{item.title}}" class="btn btn-start catButton"
                target="_blank">Trailer <i class="glyphicon glyphicon-play"></i></a>
           </form>
         </div>
